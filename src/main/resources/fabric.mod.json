@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "uwufied",
+  "version": "${version}",
+  "name": "UwUfied",
+  "description": "UwUfies (almost) every single text in game!",
+  "authors": [
+    "Mayaqq"
+  ],
+  "contact": {
+    "repo": "https://github.com/MayaqqDev/uwufied"
+  },
+  "license": "LGPL-3.0",
+  "icon": "assets/uwufied/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.mayaqq.uwufied.Uwufied"
+    ]
+  },
+  "mixins": [
+    "uwufied.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
