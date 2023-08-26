@@ -19,8 +19,7 @@ public class UwuOrderedText implements OrderedText {
                 return visitor.accept(index, style, 'u')
                         && visitor.accept(index, style, 'w')
                         && visitor.accept(index, style, 'u');
-            }
-            else if (codePoint == 'U') {
+            } else if (codePoint == 'U') {
                 return visitor.accept(index, style, 'U')
                         && visitor.accept(index, style, 'w')
                         && visitor.accept(index, style, 'U');

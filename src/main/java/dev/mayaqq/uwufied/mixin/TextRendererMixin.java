@@ -10,6 +10,28 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(TextRenderer.class)
 public class TextRendererMixin {
+    @Unique
+    private static String uwufyString(String input) {
+        int stringLength = input.length();
+        input = input
+                .replaceAll("[rR]", "w").replaceAll("[lL]", "w")
+                .replaceAll("ove", "uv").replaceAll("OVE", "UV")
+                .replaceAll("o", "owo").replaceAll("O", "OwO")
+                .replaceAll("!", "!!!").replaceAll("\\?", "???");
+        if (stringLength % 3 == 0) {
+            input = input.toUpperCase();
+        }
+        if (stringLength % 2 == 0) {
+            input = input.replaceAll("(\\w)(\\b)", "$1$1$1$1$2");
+        }
+        if (!(stringLength % 2 == 0)) {
+            input = input.replaceAll("\\b(\\w)(\\w*)\\b", "$1-$1$2");
+        }
+        String[] randomPhrases = {"UwU", "owo", "OwO", "uwu", ">w<", "^w^", "^-^", "^_^", "^w^", ":3"};
+        input += " " + randomPhrases[stringLength % randomPhrases.length];
+        return input;
+    }
+
     @ModifyVariable(
             method = "drawInternal(Ljava/lang/String;FFIZLorg/joml/Matrix4f;Lnet/minecraft/client/render/VertexConsumerProvider;Lnet/minecraft/client/font/TextRenderer$TextLayerType;IIZ)I",
             at = @At(
@@ -19,7 +41,7 @@ public class TextRendererMixin {
             argsOnly = true
     )
     private String modifyString(String text) {
-        return uwufy(text);
+        return uwufyString(text);
     }
 
     @ModifyVariable(
@@ -32,19 +54,5 @@ public class TextRendererMixin {
     )
     private OrderedText modifyText(OrderedText text) {
         return new UwuOrderedText(text);
-    }
-
-    @Unique
-    private static String uwufy(String original) {
-        return original
-                .replaceAll("r", "w")
-                .replaceAll("R", "W")
-                .replaceAll("l", "w")
-                .replaceAll("L", "W")
-                .replaceAll("u", "uwu")
-                .replaceAll("U", "UwU")
-                .replaceAll("hi ", "haiiii~ ")
-                .replaceAll("Hi ", "Haiiii~ ")
-                .replaceAll("\\.", ":3 ");
     }
 }
